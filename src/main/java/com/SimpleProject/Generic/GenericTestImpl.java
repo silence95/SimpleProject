@@ -32,7 +32,7 @@ class TestParam {
 public class GenericTestImpl extends GenericTest<TestParam> {
 
     @Override
-    protected void printParam(TestParam param) {
+    protected void printParam(TestParam param) { // 这里会出现桥方法  http://blog.csdn.net/lonelyroamer/article/details/7868820
         System.out.println("id: " + param.getId() + ",name: " + param.getName());
     } 
 
