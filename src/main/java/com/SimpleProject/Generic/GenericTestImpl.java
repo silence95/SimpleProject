@@ -47,8 +47,10 @@ public class GenericTestImpl extends GenericTest<TestParam> {
 
     public static void main(String[] args) {
         TestParam param = new TestParam("1","A");
-        new GenericTestImpl().showParam(param);
+        GenericTest<TestParam> genericTestImpl = new GenericTestImpl();
+        genericTestImpl.showParam(param);
+        System.out.println(genericTestImpl instanceof GenericTest<?>);
+        
     }
+   
 }
-
-
