@@ -2,7 +2,9 @@ package com.asm;
 
 public class Account {
 
-    public void operate() {
+    public Account() {}
+
+    public static void operate() {
         System.out.println("operate ...");
     }
     

@@ -7,6 +7,7 @@ import org.objectweb.asm.MethodVisitor;
 public class AddSecurityCheckerClassAdapter extends ClassAdapter{
 
     private String enhancedSuperName;
+    private String enhancedName;
     
     public AddSecurityCheckerClassAdapter(ClassVisitor cv) {
         super(cv);
@@ -15,9 +16,10 @@ public class AddSecurityCheckerClassAdapter extends ClassAdapter{
     public void visit(final int version, final int access, final String name, 
             final String signature, final String superName, 
             final String[] interfaces) { 
-        String enhancedName = name + "$EnhancedByASM";  // 改变类命名
+//        String enhancedName = name + "$EnhancedByASM";  // 改变类命名
         enhancedSuperName = name; // 改变父类，这里是”Account”
-        super.visit(version, access, enhancedName, signature, enhancedSuperName, interfaces); 
+//        super.visit(version, access, enhancedName, signature, enhancedSuperName, interfaces); 
+        super.visit(version, access, name, signature, superName, interfaces); 
     }
 
     public MethodVisitor visitMethod(final int access, final String name, 
@@ -26,11 +28,20 @@ public class AddSecurityCheckerClassAdapter extends ClassAdapter{
         MethodVisitor mvWrapper = mv;
         if(mv != null) {
             mvWrapper = new AddSecurityCheckerMethodAdapter(mv);
-            if (name.equals("<init>")) { 
-                mvWrapper = new ChangeToChildConstructorMethodAdapter(mv, enhancedSuperName); 
-            } 
+//            if (name.equals("<init>")) { 
+//                mvWrapper = new ChangeToChildConstructorMethodAdapter(mv, enhancedSuperName); 
+//            } 
         }
         return mvWrapper;
         
     }
+    
+    public String getEnhancedName() {
+        return enhancedName;
+    }
+
+    public void setEnhancedName(String enhancedName) {
+        this.enhancedName = enhancedName;
+    }
+    
 }
