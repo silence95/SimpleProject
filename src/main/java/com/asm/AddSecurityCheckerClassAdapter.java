@@ -16,7 +16,7 @@ public class AddSecurityCheckerClassAdapter extends ClassAdapter{
     public void visit(final int version, final int access, final String name, 
             final String signature, final String superName, 
             final String[] interfaces) { 
-        enhancedSuperName = name; // 改变父类，这里是”Account”
+        enhancedSuperName = superName; // 改变父类             // enhancedSuperName = name;  这里是“com.asm.Account” 
         super.visit(version, access, enhancedName, signature, enhancedSuperName, interfaces); 
     }
 

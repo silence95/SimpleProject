@@ -12,16 +12,15 @@ import org.objectweb.asm.ClassWriter;
 public class AsmTest {
     
     public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassFormatError, ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
-        Account account = new Account();
-        Class asmClass = generateAsmClass(account,"$EnhancedByASM");
-        Method method = Account.class.getMethod("operate", new Class[]{});
+        Class asmClass = generateAsmClass(Account.class,"$EnhancedByASM");
+        Method method = asmClass.newInstance().getClass().getMethod("operate", new Class[]{});
         method.invoke(asmClass.newInstance(), new Object[]{});
     }
     
-    public static Class generateAsmClass(Object t, String suffix) throws InstantiationException, IllegalAccessException, ClassFormatError, ClassNotFoundException {
-        String fullName = t.getClass().getName();
+    public static Class generateAsmClass(Class clazz, String suffix) throws InstantiationException, IllegalAccessException, ClassFormatError, ClassNotFoundException {
+        String fullName = clazz.getName();
         String packageName = fullName.substring(0,fullName.lastIndexOf("."));
-        String enhancedName = t.getClass().getSimpleName() + suffix;
+        String enhancedName = clazz.getSimpleName() + suffix;
         
         try {
             ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS);
