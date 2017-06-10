@@ -10,7 +10,7 @@ import java.nio.charset.CharsetDecoder;
 
 import org.junit.Test;
 
-public class NioTest {
+public class NioTester {
 
 	@Test
 	public void testReadFile() throws IOException {

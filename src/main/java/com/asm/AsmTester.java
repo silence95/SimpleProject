@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 
-public class AsmTest {
+public class AsmTester {
     
     public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassFormatError, ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
         Class asmClass = generateAsmClass(Account.class,"$EnhancedByASM");
@@ -35,7 +35,7 @@ public class AsmTest {
             fos.write(classData);
             fos.close();
 
-            AsmClassLoader asmClassLoader = new AsmClassLoader(AsmTest.class.getClassLoader());
+            AsmClassLoader asmClassLoader = new AsmClassLoader(AsmTester.class.getClassLoader());
             Class asmClass = asmClassLoader.defineClassFromClassFile(packageName + "." + enhancedName, classData);
             return asmClass;
         } catch (IOException e) {
