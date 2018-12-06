@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package test_pb;
+
+option java_package = "com.pb";
+option java_outer_classname = "TestPb";
+option java_multiple_files = true;
+
+message Person {
+  string name = 1;
+  int32 id = 2;
+
+}
